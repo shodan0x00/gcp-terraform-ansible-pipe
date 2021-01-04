@@ -20,7 +20,7 @@ provider "google" {
 
 
 data "terraform_remote_state" "compute" {
- backend = gcs 
+ backend = "gcs"
  config = {
     bucket      = @bucket-name
     prefix      = "compute"
