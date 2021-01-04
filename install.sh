@@ -42,10 +42,11 @@ sed -i -e "s/@bucket-name/\"$id\"/g" compute/create-instances.tf
 
 sed -i -e "s/@bucket-name/\"$id\"/g" template/ansible_template.tf
 
+sleep 15
 cd /opt/bootstrap/remote-state && terraform init && terraform apply -var-file='/opt/bootstrap/gcp.tfvars' -auto-approve
-sleep 10
+sleep 15
 cd /opt/bootstrap/compute && terraform init && terraform apply -var-file='/opt/bootstrap/gcp.tfvars' -auto-approve
-sleep 10
+sleep 15
 cd /opt/bootstrap/template && terraform init && terraform apply -var-file='/opt/bootstrap/gcp.tfvars' -auto-approve
 
 echo "INSTALLATION DONE"
