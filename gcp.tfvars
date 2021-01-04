@@ -1,5 +1,5 @@
-gcp_project = "silicon-park-300410"
-bucket-name   = "5235344354323245ab" 
+gcp_project = "@project-name"
+bucket-name   = "@bucket-name" 
 
 gcp_region  = "europe-west4"
 gcp_auth_file = "credentials.json"
