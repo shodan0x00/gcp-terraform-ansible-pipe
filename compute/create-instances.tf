@@ -8,7 +8,7 @@ variable "storage-class" { type = string }
 terraform {
   backend "gcs" {
     bucket      = @bucket-name
-    prefix      = "root\network-tfsate"
+    prefix      = "network-tfsate"
   }
 }
 
