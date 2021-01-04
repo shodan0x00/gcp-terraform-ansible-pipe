@@ -20,7 +20,7 @@ provider "google" {
 
 
 data "terraform_remote_state" "compute" {
- backend = "s3"
+ backend = gcs 
  config = {
     bucket      = @bucket-name
     prefix      = "compute"
@@ -34,7 +34,7 @@ data "template_file" "ansible_template" {
 }
 }
 
-resource "null_resource" "k8s-hosts" {
+resource "null_resource" "hosts" {
   triggers = {
     template_rendered = data.template_file.ansible_template.rendered
   }
