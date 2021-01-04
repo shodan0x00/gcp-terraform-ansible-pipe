@@ -1,5 +1,4 @@
 #/bin/bash
-
 id=$(tr -dc a-z0-9 </dev/urandom | head -c 24 ; echo ''); id=asg$id
 
 gcloud projects create $id
@@ -14,7 +13,7 @@ gcloud projects add-iam-policy-binding $id \
     --member="serviceAccount:acg-sg@$id.iam.gserviceaccount.com" \
     --role="roles/owner"
 
-gcloud iam service-accounts keys create ~/bootstrap/credentials.json \
+gcloud iam service-accounts keys create /opt/bootstrap/credentials.json \
   --iam-account acg-sg@$id.iam.gserviceaccount.com
 
 b=$(gcloud alpha billing accounts list --uri)
@@ -31,11 +30,11 @@ unzip -o terraform_0.14.3_linux_amd64.zip
 
 mv -f terraform /usr/bin
 
-cd bootstrap
+cd /opt/bootstrap
 
 bucket=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w ${1:-32} | head -n 1)
 
-export GOOGLE_APPLICATION_CREDENTIALS=$(pwd)/credentials.json
+export GOOGLE_APPLICATION_CREDENTIALS=/opt/bootstrap/credentials.json
 
 sed -i -e "s/@project-name/\"$id\"/g" gcp.tfvars
 
