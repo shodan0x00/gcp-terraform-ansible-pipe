@@ -18,8 +18,8 @@ provider "google" {
   region      = var.gcp_region
 }
 
-resource "google_compute_instance" "default" {
-  name         = "virtual-machine-from-terraform"
+resource "google_compute_instance" "docker-host" {
+  name         = "docker-host"
   machine_type = "f1-micro"
   zone         = var.gcp_zone
 
@@ -57,6 +57,6 @@ resource "google_compute_firewall" "http-server" {
   target_tags   = ["http-server"]
 }
 
-output "ip" {
-  value = "${google_compute_instance.default.network_interface.0.access_config.0.nat_ip}"
+output "docker_public" {
+  value = "${google_compute_instance.docker-host.network_interface.0.access_config.0.nat_ip}"
 }
