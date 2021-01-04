@@ -30,7 +30,7 @@ data "terraform_remote_state" "compute" {
 data "template_file" "ansible_template" {
   template = file("./ansible_template.cfg")
   vars = {
-    docker_public = data.terraform_remote_state.docker-host.outputs.docker_public
+    docker_public = data.terraform_remote_state.compute.outputs.docker_public
 }
 }
 
