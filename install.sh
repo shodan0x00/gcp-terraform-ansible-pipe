@@ -32,17 +32,15 @@ mv -f terraform /usr/bin
 
 cd /opt/bootstrap
 
-bucket=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w ${1:-32} | head -n 1)
-
 export GOOGLE_APPLICATION_CREDENTIALS=/opt/bootstrap/credentials.json
 
 sed -i -e "s/@project-name/\"$id\"/g" gcp.tfvars
 
-sed -i -e "s/@bucket-name/\"$bucket\"/g" gcp.tfvars
+sed -i -e "s/@bucket-name/\"$id\"/g" gcp.tfvars
 
-sed -i -e "s/@bucket-name/\"$bucket\"/g" compute/create-instances.tf
+sed -i -e "s/@bucket-name/\"$id\"/g" compute/create-instances.tf
 
-sed -i -e "s/@bucket-name/\"$bucket\"/g" template/ansible_template.tf
+sed -i -e "s/@bucket-name/\"$id\"/g" template/ansible_template.tf
 
 cd /opt/bootstrap/remote-state && terraform init && terraform apply -var-file='/opt/bootstrap/gcp.tfvars' -auto-approve
 
