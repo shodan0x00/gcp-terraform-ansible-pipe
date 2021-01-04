@@ -23,7 +23,6 @@ gcloud alpha billing accounts projects link $id --account-id $b
 
 gcloud services enable compute.googleapis.com
 
-sudo -s
 
 apt-get update && apt-get install ansible -y
 
@@ -32,8 +31,6 @@ wget https://releases.hashicorp.com/terraform/0.14.3/terraform_0.14.3_linux_amd6
 unzip -o terraform_0.14.3_linux_amd64.zip
 
 mv -f terraform /usr/bin
-
-ls
 
 bucket=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w ${1:-32} | head -n 1)
 
