@@ -7,6 +7,9 @@ gcloud projects create $id
 
 gcloud config set project $id
 
+gcloud compute project-info add-metadata \
+    --metadata enable-oslogin=TRUE
+
 gcloud iam service-accounts create acg-sg \
     --description="GCloud Service Account" \
     --display-name="ServiceAccount"
@@ -14,7 +17,7 @@ gcloud iam service-accounts create acg-sg \
 gcloud projects add-iam-policy-binding $id \
     --member="serviceAccount:acg-sg@$id.iam.gserviceaccount.com" \
     --role="roles/owner"
-
+    
 gcloud iam service-accounts keys create /opt/bootstrap/credentials.json \
   --iam-account acg-sg@$id.iam.gserviceaccount.com
 
@@ -52,7 +55,7 @@ ssh-keygen -b 2048 -t rsa -f /opt/bootstrap/ssh-key-ansible -q -N ""
 
 gcloud auth activate-service-account --key-file /opt/bootstrap/credentials.json
 
-gcloud compute os-login ssh-keys add --key-file=/opt/bootstrap/ssh-key-ansible.pub
+$ansible_sa=$(gcloud compute os-login ssh-keys add --key-file=/opt/bootstrap/ssh-key-ansible.pub | grep 'username:' | awk '{print $2}')
 
 #executing terraform inits
 sleep 15
