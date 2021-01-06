@@ -32,8 +32,6 @@ mv -f terraform /usr/bin
 
 cd /opt/bootstrap
 
-export GOOGLE_APPLICATION_CREDENTIALS=/opt/bootstrap/credentials.json
-
 sed -i -e "s/@project-name/\"$id\"/g" gcp.tfvars
 
 sed -i -e "s/@bucket-name/\"$id\"/g" gcp.tfvars
