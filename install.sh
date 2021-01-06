@@ -75,4 +75,6 @@ sleep 10
 #executing ansible inits
 cd /opt/bootstrap/ansible && ansible-playbook -i /opt/bootstrap/hosts airflow.yaml --private-key /opt/bootstrap/ssh-key-ansible
 
+cd /opt/bootstrap/ansible && ansible-playbook -i /opt/bootstrap/hosts postgres-kafka-nifi.yaml --private-key /opt/bootstrap/ssh-key-ansible
+
 echo "INSTALLATION DONE"
