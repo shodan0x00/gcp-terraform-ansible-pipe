@@ -55,9 +55,9 @@ ssh-keygen -b 2048 -t rsa -f /opt/bootstrap/ssh-key-ansible -q -N ""
 
 gcloud auth activate-service-account --key-file /opt/bootstrap/credentials.json
 
-$ansible_sa=$(gcloud compute os-login ssh-keys add --key-file=/opt/bootstrap/ssh-key-ansible.pub | grep 'username:' | awk '{print $2}')
+ansibleadmin=$(gcloud compute os-login ssh-keys add --key-file=/opt/bootstrap/ssh-key-ansible.pub | grep 'username:' | awk '{print $2}')
 
-sed -i -e "s/@sa-name/\"$ansible_sa\"/g" ansible/ansible.cfg
+sed -i -e "s/@sa-name/\"$ansibleadmin\"/g" ansible/ansible.cfg
 
 #executing terraform inits
 cd /opt/bootstrap/remote-state && terraform init && terraform apply -var-file='/opt/bootstrap/gcp.tfvars' -auto-approve
