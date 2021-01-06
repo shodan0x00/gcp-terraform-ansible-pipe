@@ -1,0 +1,10 @@
+- hosts: postgres-kafka-nifi
+  become: yes
+  gather_facts: false
+  tasks:
+
+    - name: Disable swap (1/2)
+      shell: |
+        swapoff -a
+      args:
+        executable: /bin/bash
