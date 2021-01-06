@@ -57,6 +57,8 @@ gcloud auth activate-service-account --key-file /opt/bootstrap/credentials.json
 
 $ansible_sa=$(gcloud compute os-login ssh-keys add --key-file=/opt/bootstrap/ssh-key-ansible.pub | grep 'username:' | awk '{print $2}')
 
+sed -i -e "s/@sa-name/\"$ansible_sa\"/g" ansible/ansible.cfg
+
 #executing terraform inits
 sleep 15
 cd /opt/bootstrap/remote-state && terraform init && terraform apply -var-file='/opt/bootstrap/gcp.tfvars' -auto-approve
