@@ -60,11 +60,19 @@ $ansible_sa=$(gcloud compute os-login ssh-keys add --key-file=/opt/bootstrap/ssh
 sed -i -e "s/@sa-name/\"$ansible_sa\"/g" ansible/ansible.cfg
 
 #executing terraform inits
-sleep 15
 cd /opt/bootstrap/remote-state && terraform init && terraform apply -var-file='/opt/bootstrap/gcp.tfvars' -auto-approve
-sleep 15
+
+sleep 10
+
 cd /opt/bootstrap/compute && terraform init && terraform apply -var-file='/opt/bootstrap/gcp.tfvars' -auto-approve
-sleep 15
+
+sleep 120
+
 cd /opt/bootstrap/template && terraform init && terraform apply -var-file='/opt/bootstrap/gcp.tfvars' -auto-approve
+
+sleep 10
+
+#executing ansible inits
+cd /opt/bootstrap/ansible && ansible-playbook -i /opt/bootstrap/hosts airflow.yaml --private-key /opt/bootstrap/ssh-key-ansible
 
 echo "INSTALLATION DONE"
