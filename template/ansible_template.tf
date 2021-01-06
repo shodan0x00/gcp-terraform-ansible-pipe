@@ -30,7 +30,8 @@ data "terraform_remote_state" "compute" {
 data "template_file" "ansible_template" {
   template = file("./ansible_template.cfg")
   vars = {
-    docker_public = data.terraform_remote_state.compute.outputs.docker_public
+    airflow = data.terraform_remote_state.compute.outputs.airflow
+    postgres-kafka-nifi = data.terraform_remote_state.compute.outputs.postgres_kafka_nifi
 }
 }
 
