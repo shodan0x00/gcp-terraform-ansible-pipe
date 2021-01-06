@@ -1,4 +1,4 @@
-# gcp-terraform-ansible-pipe
+# launching the first time 
 sudo -s<br>
 <br>
 rm -rf /opt/bootstrap<br>
@@ -9,3 +9,8 @@ git clone https://github.com/asborsiov/gcp-terraform-ansible-pipe.git /opt/boots
 <br>
 bash /opt/bootstrap/install.sh<br>
 
+# manual ssh 
+copy remote_user from /opt/bootstrap/ansible.cfg
+copy key file from /opt/bootstrap/ssh-key-ansible
+
+ssh -i ansible_key sa_remote_account@public_ip
