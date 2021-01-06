@@ -18,9 +18,9 @@ provider "google" {
   region      = var.gcp_region
 }
 
-resource "google_compute_instance" "docker-host" {
-  name         = "docker-host"
-  machine_type = "f1-micro"
+resource "google_compute_instance" "airflow" {
+  name         = "airflow"
+  machine_type = "e2-small"
   zone         = var.gcp_zone
 
   boot_disk {
@@ -33,30 +33,48 @@ resource "google_compute_instance" "docker-host" {
     network = "default"
 
     access_config {
-      // Include this section to give the VM an external ip address
     }
   }
 
     metadata_startup_script = "ls -la"
-
-    // Apply the firewall rule to allow external IPs to access this instance
-    tags = ["http-server"]
+    tags = ["open-all"]
 }
 
-resource "google_compute_firewall" "http-server" {
-  name    = "default-allow-http-terraform"
-  network = "default"
+resource "google_compute_instance" "postgres_kafka_nifi" {
+  name         = "postgres_kafka_nifi"
+  machine_type = "e2-medium"
+  zone         = var.gcp_zone
 
-  allow {
-    protocol = "tcp"
-    ports    = ["80"]
+  boot_disk {
+    initialize_params {
+      image = "debian-cloud/debian-9"
+    }
   }
 
-  // Allow traffic from everywhere to instances with an http-server tag
-  source_ranges = ["0.0.0.0/0"]
-  target_tags   = ["http-server"]
+  network_interface {
+    network = "default"
+
+    access_config {
+    }
+  }
+
+    metadata_startup_script = "ls -la"
+    tags = ["open-all"]
 }
 
-output "docker_public" {
-  value = "${google_compute_instance.docker-host.network_interface.0.access_config.0.nat_ip}"
+
+resource "google_compute_firewall" "open-all" {
+  name    = "default-allow-all-terraform"
+  network = "default"
+
+  source_ranges = ["0.0.0.0/0"]
+  target_tags   = ["open-all"]
+}
+
+output "airflow" {
+  value = "${google_compute_instance.airflow.network_interface.0.access_config.0.nat_ip}"
+}
+
+output "postgres_kafka_nifi" {
+  value = "${google_compute_instance.postgres_kafka_nifi.network_interface.0.access_config.0.nat_ip}"
 }
