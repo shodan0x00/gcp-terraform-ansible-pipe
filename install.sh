@@ -7,9 +7,6 @@ gcloud projects create $id
 
 gcloud config set project $id
 
-gcloud compute project-info add-metadata \
-    --metadata enable-oslogin=TRUE
-
 gcloud iam service-accounts create acg-sg \
     --description="GCloud Service Account" \
     --display-name="ServiceAccount"
@@ -26,6 +23,9 @@ b=$(gcloud alpha billing accounts list --uri)
 gcloud alpha billing accounts projects link $id --account-id $b
 
 gcloud services enable compute.googleapis.com
+
+gcloud compute project-info add-metadata \
+    --metadata enable-oslogin=TRUE
 
 #install ansible and terraform
 apt-get update && apt-get install ansible -y
