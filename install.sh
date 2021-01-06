@@ -42,6 +42,8 @@ sed -i -e "s/@bucket-name/\"$id\"/g" template/ansible_template.tf
 
 ssh-keygen -b 2048 -t rsa -f /opt/bootstrap/ssh-key-ansible -q -N ""
 
+export GOOGLE_APPLICATION_CREDENTIALS=/opt/bootstrap/credentials.json
+
 sleep 15
 cd /opt/bootstrap/remote-state && terraform init && terraform apply -var-file='/opt/bootstrap/gcp.tfvars' -auto-approve
 sleep 15
