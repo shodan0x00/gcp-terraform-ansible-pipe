@@ -1,4 +1,4 @@
-- hosts: docker_public
+- hosts: airflow_public
   become: yes
   gather_facts: false
   tasks:
