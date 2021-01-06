@@ -66,7 +66,10 @@ resource "google_compute_instance" "postgres_kafka_nifi" {
 resource "google_compute_firewall" "open-all" {
   name    = "default-allow-all-terraform"
   network = "default"
-
+  allow {	   
+    protocol = "tcp"	    
+    ports    = ["80"]
+    }  
   source_ranges = ["0.0.0.0/0"]
   target_tags   = ["open-all"]
 }
