@@ -41,7 +41,7 @@ resource "google_compute_instance" "airflow" {
 }
 
 resource "google_compute_instance" "postgres_kafka_nifi" {
-  name         = "postgres_kafka_nifi"
+  name         = "postgres-kafka-nifi"
   machine_type = "e2-medium"
   zone         = var.gcp_zone
 
