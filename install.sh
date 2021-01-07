@@ -51,11 +51,11 @@ sed -i -e "s/@bucket-name/\"$id\"/g" template/ansible_template.tf
 export GOOGLE_APPLICATION_CREDENTIALS=/opt/bootstrap/credentials.json
 
 #preparing SSH keys
-ssh-keygen -b 2048 -t rsa -f /opt/bootstrap/ssh-key-ansible -q -N ""
+ssh-keygen -b 2048 -t rsa -f /opt/bootstrap/ssh-key -q -N ""
 
 gcloud auth activate-service-account --key-file /opt/bootstrap/credentials.json
 
-ansibleadmin=$(gcloud compute os-login ssh-keys add --key-file=/opt/bootstrap/ssh-key-ansible.pub | grep 'username:' | awk '{print $2}')
+ansibleadmin=$(gcloud compute os-login ssh-keys add --key-file=/opt/bootstrap/ssh-key.pub | grep 'username:' | awk '{print $2}')
 
 sed -i -e "s/@sa-name/\"$ansibleadmin\"/g" ansible/ansible.cfg
 
@@ -73,8 +73,8 @@ cd /opt/bootstrap/template && terraform init && terraform apply -var-file='/opt/
 sleep 10
 
 #executing ansible inits
-cd /opt/bootstrap/ansible && ansible-playbook -i /opt/bootstrap/hosts airflow.yaml --private-key /opt/bootstrap/ssh-key-ansible
+cd /opt/bootstrap/ansible && ansible-playbook -i /opt/bootstrap/hosts airflow.yaml --private-key /opt/bootstrap/ssh-key
 
-cd /opt/bootstrap/ansible && ansible-playbook -i /opt/bootstrap/hosts postgres-kafka-nifi.yaml --private-key /opt/bootstrap/ssh-key-ansible
+cd /opt/bootstrap/ansible && ansible-playbook -i /opt/bootstrap/hosts postgres-kafka-nifi.yaml --private-key /opt/bootstrap/ssh-key
 
 echo "INSTALLATION DONE"
