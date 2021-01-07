@@ -11,6 +11,6 @@ bash /opt/bootstrap/install.sh<br>
 
 # manual ssh 
 copy remote_user from /opt/bootstrap/ansible.cfg
-copy key file from /opt/bootstrap/ssh-key-ansible
+copy key file /opt/bootstrap/ssh-key
 
 ssh -i ansible_key sa_remote_account@public_ip
