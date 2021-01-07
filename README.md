@@ -15,12 +15,13 @@ copy key file /opt/bootstrap/ssh-key<br>
 ssh -i ansible_key sa_remote_account@public_ip
 ```
 # How ansible pipeline works
-Scripts generates following files from created VMs and generated keys:<br>
+Script generates following files from created VMs and generated keys:<br>
 ```bash
 /opt/bootstrap/ansible/ansible.cfg 
 /opt/bootstrap/hosts 
 /opt/bootstrap/ssh-key
 ```
+Where ansible.cfg has ssh username, hosts has public IPs of created VMs and ssh-key is a private key used to ssh into those VMs.<br>
 <br>
 Copy them into your local machine and launch with this command:<br>
 ```bash
