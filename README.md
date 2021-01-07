@@ -12,7 +12,7 @@ bash /opt/bootstrap/install.sh
 copy remote_user from /opt/bootstrap/ansible.cfg<br>
 copy key file /opt/bootstrap/ssh-key<br>
 ```bash
-ssh -i ansible_key sa_remote_account@public_ip
+ssh -i <ssh-key> <remote_user>@<vm-public_ip>
 ```
 # How ansible pipeline works
 Script generates following files from created VMs and generated keys:<br>
