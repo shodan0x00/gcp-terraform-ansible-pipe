@@ -1,4 +1,7 @@
 # How to launch (restart the console for reruns)
+
+Open cloud shell (top right corner) and execute this commands
+
 ```bash
 sudo -s
 cd ~
