@@ -1,7 +1,5 @@
-# launching the first time 
+# How to launch (restart the console for reruns)
 sudo -s<br>
-<br>
-rm -rf /opt/bootstrap<br>
 <br>
 cd ~<br>
 <br>
@@ -9,7 +7,7 @@ git clone https://github.com/asborsiov/gcp-terraform-ansible-pipe.git /opt/boots
 <br>
 bash /opt/bootstrap/install.sh<br>
 
-# manual ssh 
+# How to ssh manually 
 copy remote_user from /opt/bootstrap/ansible.cfg
 copy key file /opt/bootstrap/ssh-key
 
