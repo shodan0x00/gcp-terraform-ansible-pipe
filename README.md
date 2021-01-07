@@ -23,7 +23,7 @@ Script generates following files from created VMs and generated keys:<br>
 ```
 Where 'ansible.cfg' file has ssh username, 'hosts' has public IP associations of created VMs and 'ssh-key' is a private key used to ssh into those VMs.<br>
 <br>
-Copy them into your local machine into folder where ansible.cfg reside and launch with this command:<br>
+Copy them into your local machine, go into the folder where ansible.cfg reside and launch with this command:<br>
 ```bash
 ansible-playbook -i /opt/bootstrap/hosts /opt/bootstrap/ansible/postgres-kafka-nifi.yaml --private-key /opt/bootstrap/ssh-key
 ```
