@@ -73,8 +73,8 @@ cd /opt/bootstrap/template && terraform init && terraform apply -var-file='/opt/
 sleep 10
 
 #executing ansible inits
-cd /opt/bootstrap/ansible && ansible-playbook -i /opt/bootstrap/hosts airflow.yaml --private-key /opt/bootstrap/ssh-key
+cd /opt/bootstrap/ansible && ansible-playbook -i /opt/bootstrap/hosts playbooks/install_all.yaml --private-key /opt/bootstrap/ssh-key
 
-cd /opt/bootstrap/ansible && ansible-playbook -i /opt/bootstrap/hosts postgres-kafka-nifi.yaml --private-key /opt/bootstrap/ssh-key
+#cd /opt/bootstrap/ansible && ansible-playbook -i /opt/bootstrap/hosts postgres-kafka-nifi.yaml --private-key /opt/bootstrap/ssh-key
 
 echo "INSTALLATION DONE"
