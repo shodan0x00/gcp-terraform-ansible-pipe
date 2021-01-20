@@ -1,0 +1,9 @@
+---
+- name: Create PostgreSQL database 
+  hosts: postgres_host
+  become: yes
+  gather_facts: false
+  vars_files:
+    - vars/main.yml
+  roles:
+  - postgres

@@ -1,0 +1,13 @@
+- name: Download file and force basic auth
+  get_url:
+    url: https://apache-mirror.rbc.ru/pub/apache/kafka/2.5.1/kafka_2.12-2.5.1.tgz
+    dest: /tmp/kafka.tgz
+    force_basic_auth: yes
+
+- name: Create a directory if it does not exist
+  ansible.builtin.file:
+    path: ~/kafka
+    state: directory
+
+- name: Go to the folder and execute command
+  command: chdir=~/kafka tar -xvzf /tmp/kafka.tgz --strip 1

@@ -1,0 +1,15 @@
+- name: Install requirements
+  apt: 
+    name: openjdk-8-jdk-headless
+    state: present
+
+- name: Install Nifi
+  shell: "{{ item }}"
+  with_items:
+    - chdir /tmp
+    - wget https://apache-mirror.rbc.ru/pub/apache/nifi/1.12.1/nifi-1.12.1-bin.tar.gz
+    - tar vzxf nifi-1.12.1-bin.tar.gz
+    - sudo mv nifi-1.12.1 /opt
+    - sudo ln -sfn /opt/nifi-1.12.1 /opt/nifi
+    - chdir /opt/nifi
+    - sudo bin/nifi.sh install

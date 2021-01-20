@@ -1,0 +1,6 @@
+---
+db_user: root
+db_name: dbname
+db_password: toor
+
+update_apt_cache: true

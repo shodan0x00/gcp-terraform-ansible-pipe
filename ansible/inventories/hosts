@@ -1,0 +1,9 @@
+[airlow_host]
+192.168.122.44
+[postgres_host]
+192.168.122.88
+[nifi_host]
+192.168.122.88
+[kafka_host]
+192.168.122.88
+
