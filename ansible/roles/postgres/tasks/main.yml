@@ -9,6 +9,12 @@
 - name: Add PostgreSQL 11 keys
   shell: wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
 
+- name: Update and upgrade apt packages
+  become: true
+  apt:
+    update_cache: yes
+    cache_valid_time: 86400 #One day
+
 - name: Add PostgreSQL 11 to source list
   shell: echo deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main > /etc/apt/sources.list.d/postgresql.list
 

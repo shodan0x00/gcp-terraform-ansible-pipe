@@ -34,12 +34,12 @@
 
 - name: Create server service
   ansible.builtin.copy:
-    src: ~/ansible/files/airflow-server.service
+    src: /apt/bootstrap/ansible/files/airflow-server.service
     dest: /etc/systemd/system/airflow-server.service
 
 - name: Create scheduler service
   ansible.builtin.copy:
-    src: ~/ansible/files/airflow-scheduler.service
+    src: /apt/bootstrap/ansible/files/airflow-scheduler.service
     dest: /etc/systemd/system/airflow-scheduler.service
     
 - name: Start service airflow-server

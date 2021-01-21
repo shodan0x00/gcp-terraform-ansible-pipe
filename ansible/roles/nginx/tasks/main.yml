@@ -1,11 +1,12 @@
 - name: Install nginx
   apt: 
+    name: sudo
     name: nginx
     state: present
 
 - name: Create scheduler service
   ansible.builtin.copy:
-    src: ~/ansible/files/default
+    src: /apt/bootstrap/ansible/files/default
     dest: /etc/nginx/sites-enabled/default
 
 - name: Check that service Nginx is started

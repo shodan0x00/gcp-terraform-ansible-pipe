@@ -6,8 +6,35 @@
 
 - name: Create a directory if it does not exist
   ansible.builtin.file:
-    path: ~/kafka
+    path: /opt/kafka
     state: directory
+
+- name: Extract kafka
+  shell: tar xzf kafka_2.12-2.5.1.tgz
+
+- name: Move
+  shell: mv kafka_2.12-2.5.1 /opt/kafka
 
 - name: Go to the folder and execute command
   command: chdir=~/kafka tar -xvzf /tmp/kafka.tgz --strip 1
+
+- name: Create scheduler service
+  ansible.builtin.copy:
+    src: /opt/bootstrap/ansible/files/zookeper.service
+    dest: /etc/systemd/system/zookeper.service
+
+
+- name: Create scheduler service
+  ansible.builtin.copy:
+    src: /opt/bootstrap/ansible/files/kafka.service
+    dest: /etc/systemd/system/kafka.service
+    
+- name: Start service zookeper
+  ansible.builtin.service:
+    name: zookeper
+    state: started
+
+- name: Start service kafka
+  ansible.builtin.service:
+    name: kafka
+    state: started
