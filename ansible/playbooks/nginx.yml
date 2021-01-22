@@ -1,6 +1,6 @@
 ---
 - name: Setup nginx 
-  hosts: airlow_host, nifi_host
+  hosts: airlow, postgres-kafka-nifi
   become: yes
   gather_facts: false
   vars_files:

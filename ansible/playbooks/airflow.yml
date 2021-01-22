@@ -1,6 +1,6 @@
 ---
 - name: Setup Airflow service
-  hosts: airlow_host
+  hosts: airflow
   become: yes
   gather_facts: false
   vars_files:

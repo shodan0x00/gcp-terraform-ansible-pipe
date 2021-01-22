@@ -1,37 +1,31 @@
-- name: Download file and force basic auth
+- name: Download kafka
   get_url:
     url: https://apache-mirror.rbc.ru/pub/apache/kafka/2.5.1/kafka_2.12-2.5.1.tgz
     dest: /tmp/kafka.tgz
     force_basic_auth: yes
 
-- name: Create a directory if it does not exist
-  ansible.builtin.file:
-    path: /opt/kafka
-    state: directory
+- name: Extract
+  ansible.builtin.unarchive:
+    src: /tmp/kafka.tgz
+    dest: /opt/
+    remote_src: yes
 
-- name: Extract kafka
-  shell: tar xzf kafka_2.12-2.5.1.tgz
-
-- name: Move
-  shell: mv kafka_2.12-2.5.1 /opt/kafka
-
-- name: Go to the folder and execute command
-  command: chdir=~/kafka tar -xvzf /tmp/kafka.tgz --strip 1
-
-- name: Create scheduler service
+- name: Copy zookeper unit
   ansible.builtin.copy:
-    src: /opt/bootstrap/ansible/files/zookeper.service
-    dest: /etc/systemd/system/zookeper.service
+    src: "{{file_location}}/zookeeper.service"
+    dest: /etc/systemd/system/zookeeper.service
 
-
-- name: Create scheduler service
+- name: Copy kafka unit
   ansible.builtin.copy:
-    src: /opt/bootstrap/ansible/files/kafka.service
+    src: "{{file_location}}/kafka.service"
     dest: /etc/systemd/system/kafka.service
     
+- name: Reload Units
+  shell: systemctl daemon-reload 
+
 - name: Start service zookeper
   ansible.builtin.service:
-    name: zookeper
+    name: zookeeper
     state: started
 
 - name: Start service kafka

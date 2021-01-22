@@ -4,9 +4,9 @@
     name: nginx
     state: present
 
-- name: Create scheduler service
+- name: Copy configs
   ansible.builtin.copy:
-    src: /apt/bootstrap/ansible/files/default
+    src: "{{file_location}}/default"
     dest: /etc/nginx/sites-enabled/default
 
 - name: Check that service Nginx is started

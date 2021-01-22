@@ -1,6 +1,6 @@
 ---
 - name: Setup Nifi
-  hosts: nifi_host
+  hosts: postgres-kafka-nifi
   become: yes
   gather_facts: false
   vars_files:

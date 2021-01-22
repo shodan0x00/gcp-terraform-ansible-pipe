@@ -1,9 +1,5 @@
-[airlow_host]
+[airflow]
 192.168.122.44
-[postgres_host]
-192.168.122.88
-[nifi_host]
-192.168.122.88
-[kafka_host]
+[postgres-kafka-nifi]
 192.168.122.88
 
