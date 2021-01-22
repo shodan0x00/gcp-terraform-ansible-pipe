@@ -22,6 +22,7 @@
   apt:
     name: postgresql-11
     state: present
+    update_cache: yes
 
 - name: Check that PostgreSQL service is running
   service: name=postgresql state=started enabled=yes

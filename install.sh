@@ -80,4 +80,3 @@ cd /opt/bootstrap/ansible && ansible-playbook -i /opt/bootstrap/hosts playbooks/
 #cd /opt/bootstrap/ansible && ansible-playbook -i /opt/bootstrap/hosts postgres-kafka-nifi.yaml --private-key /opt/bootstrap/ssh-key
 
 echo "INSTALLATION DONE"
-vi 
